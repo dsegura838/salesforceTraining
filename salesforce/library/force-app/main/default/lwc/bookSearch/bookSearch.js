@@ -1,10 +1,10 @@
-import { LightningElement,track } from 'lwc';
-// import server side apex class method 
-import getBookList from '@salesforce/apex/LibrarySearch.getBookList';
-//import standard toastevent
+import { LightningElement, track } from 'lwc';
+// import server side apex class method
+import getBooksByName from '@salesforce/apex/LibrarySearch.getBooksByName';
+//import standard toastEvent
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-export default class LibrarySearch extends LightningElement {
+export default class BookSearch extends LightningElement {
     @track bookRecord;
     searchValue = '';
 

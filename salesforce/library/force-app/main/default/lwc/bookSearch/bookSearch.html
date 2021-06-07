@@ -4,7 +4,7 @@
         <div class="slds-m-bottom_small">
             <lightning-input type="text"
                value={searchValue}
-               label="UserID"
+               label="Search by Book Name"
                onchange={searchKeyword}
                ></lightning-input>
          </div>
@@ -21,10 +21,7 @@
                      <div class="slds-truncate" title="Title">Book Title</div>
                   </th>
                   <th class="" scope="col">
-                     <div class="slds-truncate" title="Author">Author</div>
-                  </th>
-                  <th class="" scope="col">
-                     <div class="slds-truncate" title="Issue Date">Issued Date</div>
+                     <div class="slds-truncate" title="Status">Status</div>
                   </th>
                </tr>
             </thead>
@@ -36,11 +33,9 @@
                         <div class="slds-truncate">{bInfo.Book__r.Name}</div>
                      </td>
                      <td>
-                        <div class="slds-truncate">{bInfo.Book__r.author__c}</div>
+                        <div class="slds-truncate">{bInfo.Book__r.status__c}</div>
                      </td>
-                     <td>
-                        <lightning-layout-item class="slds-truncate">{bInfo.Issued_Date__c}</lightning-layout-item>
-                     </td>
+                    
                   </tr>
                </template>
             </tbody>
