@@ -1,0 +1,47 @@
+<template>
+    <div class="slds-m-around_medium">
+      
+        <div class="slds-m-bottom_small">
+            <lightning-input type="text"
+               value={searchValue}
+               label="UserID"
+               onchange={searchKeyword}
+               ></lightning-input>
+         </div>
+         
+         <lightning-button label="Search"
+            onclick={handleSearchKeyword}
+            variant="brand"></lightning-button>
+            
+        
+         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
+            <thead>
+               <tr class="slds-line-height_reset">
+                  <th class="" scope="col">
+                     <div class="slds-truncate" title="Title">Book Title</div>
+                  </th>
+                  <th class="" scope="col">
+                     <div class="slds-truncate" title="Author">Author</div>
+                  </th>
+                  <th class="" scope="col">
+                     <div class="slds-truncate" title="Issue Date">Issued Date</div>
+                  </th>
+               </tr>
+            </thead>
+            
+            <tbody>   
+               <template for:each={book_borrow_information__c} for:item="bInfo">
+                  <tr class="slds-hint-parent" key={books__c.Id}>
+                     <td>
+                        <div class="slds-truncate">{bInfo.book__r.Name}</div>
+                     </td>
+                     <td>
+                        <div class="slds-truncate">{bInfo.book__r.author__c}</div>
+                     </td>
+                  </tr>
+               </template>
+            </tbody>
+         </table>
+      </div>
+    
+</template>
