@@ -27,12 +27,16 @@ public with sharing class LibrarySearch {
       
     }
     @AuraEnabled(cacheable=true)
-    public static list<Book_Borrow_Information__c> getBooksByName(string searchKey){
-        //List to store book info
-        list<Book_Borrow_Information__c> bookInfoRecords = new list<Book_Borrow_Information__c>();
+    public static list<Book__c> getBooksByName(string searchKey){
+        
+        string searchKeyword = '%' + searchKey + '%';
 
-        for(Book_Borrow_Information__c bookInfo : 
-        [Select book__r.Name, book__r.status__c from Book_Borrow_Information__c]){
+        //List to store book info
+        list<Book__c> bookInfoRecords = new list<Book__c>();
+
+        for(Book__c bookInfo : 
+        [Select Name, status__c from Book__c where Name LIKE :searchKeyword]){
+        //[Select book__r.Name, book__r.status__c from Book_Borrow_Information__c]){
             bookInfoRecords.add(bookInfo);
         }
         //handle no search results

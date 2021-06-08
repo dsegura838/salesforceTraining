@@ -1,45 +1,33 @@
 <template>
-    <div class="slds-m-around_medium">
-      
-        <div class="slds-m-bottom_small">
-            <lightning-input type="text"
-               value={searchValue}
-               label="Search by Book Name"
-               onchange={searchKeyword}
-               ></lightning-input>
-         </div>
-         
-         <lightning-button label="Search"
-            onclick={handleSearchKeyword}
-            variant="brand"></lightning-button>
-            
-        
-         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
-            <thead>
-               <tr class="slds-line-height_reset">
-                  <th class="" scope="col">
-                     <div class="slds-truncate" title="Title">Book Title</div>
-                  </th>
-                  <th class="" scope="col">
-                     <div class="slds-truncate" title="Status">Status</div>
-                  </th>
-               </tr>
-            </thead>
-            
-            <tbody>   
-               <template for:each={Book_Borrow_Information__c} for:item="bInfo">
-                  <tr class="slds-hint-parent" key={Book_Borrow_Information__c.Id__c}>
-                     <td>
-                        <div class="slds-truncate">{bInfo.Book__r.Name}</div>
-                     </td>
-                     <td>
-                        <div class="slds-truncate">{bInfo.Book__r.status__c}</div>
-                     </td>
-                    
-                  </tr>
-               </template>
-            </tbody>
-         </table>
+   <lightning-card title="Search by Book Name" icon-name="custom:book__c">
+      <div if:true={errorMsg} style="margin-left: 3%,">
+         <p style="color: red;">{errorMsg}</p>
       </div>
+
+      <lightning-layout multiple-rows="true" vertical-align="end">
+         <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="6" padding="around-small">
+            <div class="slds-form-element_">
+               <div class="slds-form-element__control">
+                  <lightning-input type="text"
+                  label="Enter Book Name"
+                  onchange={handleBookName}>
+                  </lightning-input>
+               </div>   
+            </div>
+
+         </lightning-layout-item>
+         <lightning-layout-item size="12" small-device-size="2" medium-device-size="2" large-device-size="2" padding="around-small">
+            <lightning-button label="Search" 
+                              variant="brand" 
+                              onclick={handleSearch}></lightning-button>
+        </lightning-layout-item>
+      </lightning-layout><br/>
+         <div if:true={searchData}>
+            <lightning-datatable data={searchData} 
+                                 columns={columns} 
+                                 key-field="id"
+                                 hide-checkbox-column="true"></lightning-datatable>
+      </div>
+   </lightning-card> 
     
 </template>

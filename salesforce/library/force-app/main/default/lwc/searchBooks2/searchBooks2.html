@@ -1,0 +1,32 @@
+<template>
+    <lightning-layout>
+        <lightning-layout-item>
+            <lightning-radio-group name="Search Options"
+                label= "Search Options"
+                options={options}
+                value={value}
+                required
+                type="button">
+
+            </lightning-radio-group>
+        </lightning-layout-item>
+    </lightning-layout>
+    <lightning-layout multiple-rows="true" vertical-align="end">
+        <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="6" padding="around-small">
+           <div class="slds-form-element_">
+              <div class="slds-form-element__control">
+                 <lightning-input type="text"
+                 label="Enter Book Name"
+                 onchange={handleBookName}>
+                 </lightning-input>
+              </div>   
+           </div>
+
+        </lightning-layout-item>
+        <lightning-layout-item size="12" small-device-size="2" medium-device-size="2" large-device-size="2" padding="around-small">
+           <lightning-button label="Search" 
+                             variant="brand" 
+                             onclick={handleSearch}></lightning-button>
+       </lightning-layout-item>
+     </lightning-layout><br/>
+</template>
