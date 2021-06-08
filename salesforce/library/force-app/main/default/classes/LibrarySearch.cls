@@ -46,5 +46,22 @@ public with sharing class LibrarySearch {
         //return bookInfoRecords List
         return bookInfoRecords;
     }
+
+    @AuraEnabled
+    public static list<Book__c> searchBooks(string searchKey, string searchType){
+        try {
+            //create a search query with passed in parameters
+            String query = 'Select Id__c, Name, Author__c, Status__c from Book__c where '+searchType+' LIKE '+'\''+'%'+searchKey+'%'+'\'';
+
+            //pass results into a list
+            List<Book__c> listOfBooks = Database.query(query);
+            
+            //return list
+            return listOfBooks;
+
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
 }
 

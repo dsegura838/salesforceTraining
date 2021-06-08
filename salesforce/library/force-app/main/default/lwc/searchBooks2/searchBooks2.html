@@ -1,23 +1,31 @@
 <template>
+    <lightning-card class="slds-align_absolute-center" title="Library Search" icon-name="custom:book">
+        <template if:true={errorMsg} style="margin-left: 3%,">
+            <p style="color: red;">{errorMsg}</p>
+        </template>
+    
     <lightning-layout>
-        <lightning-layout-item>
+        <lightning-layout-item class="slds-align_absolute-center">
+           
             <lightning-radio-group name="Search Options"
                 label= "Search Options"
                 options={options}
-                value={value}
+                value={searchType}
+                onchange={handleRadioChange}
                 required
                 type="button">
 
             </lightning-radio-group>
+        
         </lightning-layout-item>
     </lightning-layout>
     <lightning-layout multiple-rows="true" vertical-align="end">
         <lightning-layout-item size="12" small-device-size="10" medium-device-size="8" large-device-size="6" padding="around-small">
            <div class="slds-form-element_">
               <div class="slds-form-element__control">
-                 <lightning-input type="text"
-                 label="Enter Book Name"
-                 onchange={handleBookName}>
+                 <lightning-input class="slds-align_absolute-center" type="text"
+                 label="Search"
+                 onchange={handleSearchQuery}>
                  </lightning-input>
               </div>   
            </div>
@@ -29,4 +37,22 @@
                              onclick={handleSearch}></lightning-button>
        </lightning-layout-item>
      </lightning-layout><br/>
+     
+     
+     <lightning-layout style="height: 300px;">
+       <template if:true = {listOfBooks}>
+         <lightning-datatable
+            key-field="id"
+            data={listOfBooks}
+            columns={columns}
+            onrowselection={getSelectedName}>
+        </lightning-datatable>
+        </template>
+     </lightning-layout><br/>
+    
+
+     <lightning-layout>
+         <lightning-button label="Borrow" title="successful action" onclick={handleBorrowBook} class="slds-var-m-left_x-small"></lightning-button>
+     </lightning-layout>
+    </lightning-card>
 </template>
