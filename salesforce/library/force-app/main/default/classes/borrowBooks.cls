@@ -22,8 +22,10 @@ public with sharing class borrowBooks {
                 //add info to book_B_info object
                 borrowBookInfo.Book__c = book.Id;
                 borrowBookInfo.User__c = userID;
+                
                 borrowBookInfo.Issued_Date__c = Date.today();
                 borrowBookInfo.Returned_Date__c = Date.today()+14;
+                borrowBookInfo.IsBorrowActive__c = true;
                 //add to list of Book_Borrow_Info that needs to be inserted
                 newBBI.add(borrowBookInfo);
             }

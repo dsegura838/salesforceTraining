@@ -26,28 +26,7 @@ const columns = [
 ];
 
 export default class LibrarySearch extends LightningElement {
-// @wire(getBookList)
-                    // book({error, data})
-//     if(data){
-//         let currentData = [];
-//         data.forEach((row) => {
-//             let rowData={};
-//             rowData.Issued_Date__c = row.Issued_Date__c
 
-//             //book related data
-//             if(row.Book__r){
-//                 rowData.Title = row.Book__r.Name;
-//                 rowData.Author = row.Book__r.Author__c;
-//                 rowData.Status = row.Book__r.Status__c;
-//             }
-//             currentData.push(rowData);
-//         });
-//         this.searchData = currentData;
-//     }
-//     else if(error){
-//         window.console.log(error);
-//     }
-// // }
     
     searchData;
     columns = columns;
@@ -77,6 +56,7 @@ export default class LibrarySearch extends LightningElement {
                 .then(result =>{
                     
                 this.searchData = result;
+                console.log(this.searchData);
             })
             .catch(error =>{
                 this.searchData = undefined;

@@ -1,0 +1,17 @@
+<template>
+    <div style="height: 500px;">
+        <lightning-datatable
+            key-field="id"
+            data={listOfBorrowedBooks}
+            columns={columns}
+            onrowselection={getSelectedRows}>    
+
+        </lightning-datatable>
+    </div><br/>
+        
+    <lightning-button variant="success" label="Return" title="successful action" onclick={handleReturn} class="slds-var-m-left_x-small">
+
+        </lightning-button>
+    
+    
+</template>

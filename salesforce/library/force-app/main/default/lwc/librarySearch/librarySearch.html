@@ -26,7 +26,11 @@
          </lightning-layout-item>
 
       </lightning-layout><br/>
-      <template if:true={searchData}>
+     
+      <!--searchData-->
+      <template if:true={searchData} >
+         
+         <!--searchData-->
          <lightning-datatable data={searchData}
             columns={columns}
             key-field="id"
@@ -34,52 +38,5 @@
          </lightning-datatable>
       </template>
    </lightning-card>
-    <!-- <div class="slds-m-around_medium">
-      
-        <div class="slds-m-bottom_small">
-            <lightning-input type="text"
-               value={searchValue}
-               label="UserID"
-               onchange={searchKeyword}
-               ></lightning-input>
-         </div>
-         
-         <lightning-button label="Search"
-            onclick={handleSearchKeyword}
-            variant="brand"></lightning-button>
-            
-        
-         <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-m-top_small">
-            <thead>
-               <tr class="slds-line-height_reset">
-                  <th class="" scope="col">
-                     <div class="slds-truncate" title="Title">Book Title</div>
-                  </th>
-                  <th class="" scope="col">
-                     <div class="slds-truncate" title="Author">Author</div>
-                  </th>
-                  <th class="" scope="col">
-                     <div class="slds-truncate" title="Issue Date">Issued Date</div>
-                  </th>
-               </tr>
-            </thead>
-            
-            <tbody>   
-               <template for:each={Book_Borrow_Information__c} for:item="bInfo">
-                  <tr class="slds-hint-parent" key={Book_Borrow_Information__c.Id__c}>
-                     <td>
-                        <div class="slds-truncate">{bInfo.Book__r.Name}</div>
-                     </td>
-                     <td>
-                        <div class="slds-truncate">{bInfo.Book__r.author__c}</div>
-                     </td>
-                     <td>
-                        <lightning-layout-item class="slds-truncate">{bInfo.Issued_Date__c}</lightning-layout-item>
-                     </td>
-                  </tr>
-               </template>
-            </tbody>
-         </table>
-      </div> -->
     
 </template>
