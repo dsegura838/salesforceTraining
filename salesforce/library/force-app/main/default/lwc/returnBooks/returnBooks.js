@@ -9,7 +9,7 @@ export default class ReturnBooks extends LightningElement {
     @track listOfBorrowedBooks;
     //@track columns;
     bookSelectedForReturn;
-    books;
+    //books;
     
     error;
     
@@ -26,6 +26,7 @@ export default class ReturnBooks extends LightningElement {
    
     connectedCallback(){
         console.log(Id);
+
         this.borrowedBooksList();
         
         console.log('Hello');
@@ -41,18 +42,27 @@ export default class ReturnBooks extends LightningElement {
                 console.log(Id);
                 console.log(result);
                 this.listOfBorrowedBooks = result;
+
                 let preparedAssets = [];
                 this.listOfBorrowedBooks.forEach(asset => {
                     let preparedAsset = {};
                     console.log('Borrow ID'+asset.Id);
+                    
                     preparedAsset.Id = asset.Id;
+                    console.log('error 1');
                     preparedAsset.Book__c = asset.Book__r.Id;
+                     console.log('error 2');
                     preparedAsset.Name = asset.Book__r.Name;
+                     console.log('error 3');
                     preparedAsset.Status__c = asset.Book__r.Status__c;
+                     console.log('error 4');
                     console.log('Issued Date'+asset.Issued_Date__c);
                     preparedAsset.Issued_Date__c = asset.Issued_Date__c;
+                     console.log('error 5');
                     preparedAsset.Returned_Date__c = asset.Returned_Date__c;
+                     console.log('error 6');
                     preparedAsset.IsBorrowActive__c = asset.IsBorrowActive__c;
+                     console.log('error 7');
                     //push flattened data into preparedAssets array
                     preparedAssets.push(preparedAsset);
                     window.console.log(preparedAssets);
@@ -61,10 +71,12 @@ export default class ReturnBooks extends LightningElement {
                 this.listOfBorrowedBooks = preparedAssets;
                 this.error=undefined;
                 console.log(preparedAssets);
+                console.log('success');
             })
             .catch((error)=>{
                 this.error = error;
                 this.listOfBorrowedBooks=undefined;
+                console.log('error occurred');
             });
     
     }

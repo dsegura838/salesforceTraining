@@ -1,0 +1,11 @@
+<template>
+    <template if:true={listOfBorrowedBooks}>
+        <lightning-datatable
+            key-field="id"
+            data={listOfBorrowedBooks}
+            columns={columns}
+            hide-checkbox-column="true">
+        </lightning-datatable>
+    </template>
+    
+</template>

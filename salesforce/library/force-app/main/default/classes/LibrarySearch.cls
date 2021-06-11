@@ -3,17 +3,16 @@ public with sharing class LibrarySearch {
     @AuraEnabled(cacheable=true)
     public static list<Book_Borrow_Information__c> getBookList(String searchKey) {
         
-        string searchKeyword = '%' + searchKey + '%';
         
         //List to store book records
         list<Book_Borrow_Information__c> bookInfoRecords = new list<Book_Borrow_Information__c>();
 
         
         for(Book_Borrow_Information__c bookInfo : 
-            [Select book__r.Name, book__r.Author__c, Issued_Date__c 
+            [Select book__c, Book__r.Name, book__r.Author__c, book__r.Status__c, Issued_Date__c, Returned_Date__c, IsBorrowActive__c, user__c
             from Book_Borrow_Information__c 
-            where user__r.id__c LIKE :searchKeyword
-            AND (book__r.status__c = 'OVERDUE' OR book__r.status__c = 'BORROWED')]){
+            where user__c = :searchKey]){
+                system.debug(bookInfo.user__c);
                 bookInfoRecords.add(bookInfo);
         }
         
@@ -34,9 +33,9 @@ public with sharing class LibrarySearch {
         //List to store book info
         list<Book__c> bookInfoRecords = new list<Book__c>();
 
-        for(Book__c bookInfo : 
-        [Select Name, status__c from Book__c where Name LIKE :searchKeyword]){
-        //[Select book__r.Name, book__r.status__c from Book_Borrow_Information__c]){
+        for(Book__c bookInfo : [Select Id, Name, Author__c, status__c 
+        from Book__c
+        where Name LIKE :searchKeyword]){
             bookInfoRecords.add(bookInfo);
         }
         //handle no search results
@@ -46,6 +45,10 @@ public with sharing class LibrarySearch {
         //return bookInfoRecords List
         return bookInfoRecords;
     }
+
+
+
+
 
     @AuraEnabled
     public static list<Book__c> searchBooks(string searchKey, string searchType){
@@ -86,6 +89,24 @@ public with sharing class LibrarySearch {
             throw new AuraHandledException(e.getMessage());
         }
     }
+
+    @AuraEnabled
+    public static List<Book_Borrow_Information__c> getBorrowHistory(Id userId){
+        try {
+            //create list to store BBI
+            List<Book_Borrow_Information__c> borrowHist = [Select Id, Book__r.Id, Book__r.Name, Book__r.Author__c, Book__r.Status__c, IsBorrowActive__c 
+            from Book_Borrow_Information__c 
+            where IsBorrowActive__c = false AND User__r.Id = :userId];
+
+            //return borrowHist list
+            return borrowHist;
+
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+        
+    }
+
     @AuraEnabled
     public static string returnBooks(List<Book_Borrow_Information__c> returnedBooks){
         try {

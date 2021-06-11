@@ -1,0 +1,14 @@
+<template>
+    <lightning-card>
+        <lightning-record-form
+            object-api-name={objectApiName}
+            fields={fields}
+            onsuccess={handleSuccess}>
+
+            <lightning-input-field field-name="Title"></lightning-input-field>
+            <lightning-input-field field-name='Author'></lightning-input-field>
+
+        </lightning-record-form>
+    </lightning-card>
+    
+</template>
